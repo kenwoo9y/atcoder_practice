@@ -1,27 +1,7 @@
-from math import ceil, floor
+from functools import cache
 
-N = int(input())
+@cache
+def f(N):
+    return 0 if N == 1 else f(N // 2) + f((N + 1) // 2) + N
 
-numbers = []
-total_amount = 0
-
-numbers.append(N)
-
-while True:
-    x = next(filter(lambda i: i >= 2, numbers), None)
-
-    if x == None:
-        break
-
-    total_amount += x
-
-    numbers.remove(x)
-
-    ceil_number = ceil(x/2)
-    floor_number = floor(x/2)
-    numbers.append(ceil_number)
-    numbers.append(floor_number)
-    
-    continue
-
-print(total_amount)
+print(f(int(input())))
